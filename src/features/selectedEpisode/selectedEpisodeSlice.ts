@@ -12,7 +12,7 @@ const initialState: SelectedEpisode = {
   selectedEpisode: null,
 };
 
-export const episodesSlice = createSlice({
+export const selectedEpisodeSlice = createSlice({
   name: SELECTED_EPISODE,
   initialState,
   reducers: {
@@ -22,8 +22,8 @@ export const episodesSlice = createSlice({
   },
 });
 
-export const { selectEpisode } = episodesSlice.actions;
+export const { selectEpisode } = selectedEpisodeSlice.actions;
 
 export const getSelectedEpisode = (state: RootState) => state.selectedEpisode;
 
-export default episodesSlice.reducer;
+export default selectedEpisodeSlice.reducer;

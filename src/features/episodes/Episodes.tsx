@@ -1,21 +1,28 @@
 import { useEffect, useState } from 'react';
-import { sortEpisodesBy } from './episodesSlice';
+import { searchInEpisodes, sortEpisodesBy } from './episodesSlice';
 import { SortKey } from './sortSlice';
 
-export function Episodes({episodes, sort, onSort}:any) {
-  const [sortedEpisodes, setSortedEpisodes] = useState([...episodes]);
+export function Episodes({episodes, sort, selectedEpisode, onSort, searchQuery, onEpisodeSelected}:any) {
+  const [episodesView, setEpisodesView] = useState(episodes);
   useEffect(()=>{
-    setSortedEpisodes(sortEpisodesBy([...episodes], sort));
+    setEpisodesView(sortEpisodesBy(episodesView.length?[...episodesView]:[...episodes], sort));
   },[sort, episodes]);
+
+  useEffect(()=>{
+    setEpisodesView(searchInEpisodes([...episodes], searchQuery))
+  },[searchQuery]);
 
   return (
     <div>
       <ul>
         {
-          sortedEpisodes.map((movieEpisode: MovieEpisode) => 
-            <li key={movieEpisode.title}>
+          episodesView.map((movieEpisode: MovieEpisode) =>
+            <li 
+              key={movieEpisode.title}
+              className={movieEpisode.title==selectedEpisode?.title?'App-link ':''} 
+              onClick={()=>onEpisodeSelected(movieEpisode)}>
               {movieEpisode.title}
-            </li>          
+            </li>
           )
         }
       </ul>

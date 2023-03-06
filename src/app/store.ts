@@ -2,14 +2,14 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import episodesReducer from '../features/episodes/episodesSlice';
 import sortReducer from '../features/episodes/sortSlice';
 import searchReducer from '../features/search/searchSlice';
-import selectedEpisode from '../features/selectedEpisode/selectedEpisodeSlice';
+import selectedEpisodeReducer from '../features/selectedEpisode/selectedEpisodeSlice';
 
 export const store = configureStore({
   reducer: {
     episodes: episodesReducer,
     sort: sortReducer,
     search: searchReducer,
-    selectedEpisode: selectedEpisode
+    selectedEpisode: selectedEpisodeReducer
   },
 });
 

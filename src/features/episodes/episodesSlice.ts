@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { SortKey, SortState } from './sortSlice';
+import Fuse from "fuse.js";
 
 export const EPISODES = 'episodes';
 export const LOAD_EPISODES = `${EPISODES}/loadEpisodes`;
@@ -8,6 +9,13 @@ export enum FetchEpisodesState {
   IDLE='idle',
   LOADING='loading',
   FAILED='failed'
+}
+
+export const EPISODES_SEARCH_KEYS = ['episode_id', 'title', 'release_date'];
+
+export const FUSE_OPTIONS = {
+  threshold: 0.3,
+  keys: EPISODES_SEARCH_KEYS
 }
 
 export const FILMS_API = 'https://swapi.dev/api/films/?format=json';
@@ -68,4 +76,11 @@ export function sortEpisodesBy(episodes:MovieEpisode[], {key, ascending}: SortSt
       }
       return ascending? a[SortKey.EPISODE] -  b[SortKey.EPISODE] : b[SortKey.EPISODE] -  a[SortKey.EPISODE];
   });
+}
+
+export function searchInEpisodes(episodes:MovieEpisode[], searchQuery:string){
+  const fuse = new Fuse(episodes, FUSE_OPTIONS);
+  return searchQuery
+  ? (fuse.search(searchQuery).map((row: Fuse.FuseResult<MovieEpisode>) => row.item) as [])
+  : episodes;
 }
