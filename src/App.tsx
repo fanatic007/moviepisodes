@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from './app/hooks';
 import { Episodes } from './features/episodes/Episodes';
 import { searchInEpisodes } from './features/episodes/episodesHelpers';
 import { getEpisodes, loadEpisodesAsync } from './features/episodes/episodesSlice';
+import SearchInput from './features/search/SearchInput';
 import { getSearchQuery, searchEpisode } from './features/search/searchSlice';
 import { getSelectedEpisode, selectEpisode } from './features/selectedEpisode/selectedEpisodeSlice';
 
@@ -26,18 +27,23 @@ function App() {
   },[episodes]);
 
   return (
-    <div className="App">
+    <>
       <header>
         <h1>moviepisodes</h1>
-        <input type='search' onChange={(e)=>dispatch(searchEpisode(e.target.value))}/>
+        <SearchInput
+          onSearch={(searchQuery:string)=>dispatch(searchEpisode(searchQuery))}
+        />
       </header>
       <h2>{selectedEpisode?.title}</h2>
-      <Episodes 
-        episodes={filteredEpisodes}
-        selectedEpisode={selectedEpisode}
-        onEpisodeSelected={(selectedMovie:MovieEpisode)=>dispatch(selectEpisode(selectedMovie))}
-      /> 
-    </div>
+      {
+        filteredEpisodes &&
+        <Episodes 
+          episodes={filteredEpisodes}
+          selectedEpisode={selectedEpisode}
+          onEpisodeSelected={(selectedMovie:MovieEpisode)=>dispatch(selectEpisode(selectedMovie))}
+        />
+      } 
+    </>
   );
 }
 

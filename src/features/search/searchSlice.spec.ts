@@ -10,7 +10,7 @@ describe('search reducer', () => {
     expect(searchQuery).toEqual('');
   });
 
-  it('should sort by episode', () => {
+  it('should search in episodes', () => {
     const {searchQuery} = searchReducer(initialState, searchEpisode('jedi'));
     expect(searchQuery).toEqual('jedi');
   });
