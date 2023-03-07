@@ -1,40 +1,39 @@
 import { useEffect, useState } from 'react';
-import { searchInEpisodes, sortEpisodesBy } from './episodesSlice';
-import { SortKey } from './sortSlice';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import TableSortHead from '../sort/TableSortHead';
+import Table from '../sort/TableSortHead';
+import { sortEpisodesBy } from './episodesHelpers';
+import { columnsConfig, getSortKey, sortEpisodes, SortState } from '../sort/sortSlice';
 
-export function Episodes({episodes, sort, selectedEpisode, onSort, searchQuery, onEpisodeSelected}:any) {
+export function Episodes({episodes, selectedEpisode, onEpisodeSelected}:any) {
   const [episodesView, setEpisodesView] = useState(episodes);
+  const dispatch = useAppDispatch();
+  const {sort} = useAppSelector(getSortKey); 
   useEffect(()=>{
-    setEpisodesView(sortEpisodesBy(episodesView.length?[...episodesView]:[...episodes], sort));
+    setEpisodesView(sortEpisodesBy([...episodesView], sort));
   },[sort, episodes]);
 
   useEffect(()=>{
-    setEpisodesView(searchInEpisodes([...episodes], searchQuery))
-  },[searchQuery]);
+    setEpisodesView(sortEpisodesBy([...episodes], sort));
+  },[episodes]);
 
   return (
-    <div>
-      <ul>
-        {
-          episodesView.map((movieEpisode: MovieEpisode) =>
-            <li 
-              key={movieEpisode.title}
-              className={movieEpisode.title==selectedEpisode?.title?'App-link ':''} 
-              onClick={()=>onEpisodeSelected(movieEpisode)}>
-              {movieEpisode.title}
-            </li>
-          )
-        }
-      </ul>
-      <div>
-        <button onClick={() => onSort({key:SortKey.EPISODE, ascending:true})}>
-          Sort By Episode
-        </button>
-        <button onClick={() => onSort({key:SortKey.YEAR, ascending:true})}>
-          Sort By Year
-        </button>
-      </div>
-    </div>
+    <table>
+      <TableSortHead 
+        sortState={sort} 
+        onSort={(sort:SortState)=>dispatch(sortEpisodes(sort))}
+        columnsConfig={columnsConfig}/>
+        <tbody>
+            {
+              episodesView.map(({episode_id, title, release_date}:any)=>
+                <tr key={episode_id}>
+                  <td>{episode_id}</td>
+                  <td>{title}</td>
+                  <td>{new Date(release_date).getFullYear()}</td>
+                </tr>
+              )
+            }
+        </tbody>
+    </table>
   );
-
 }

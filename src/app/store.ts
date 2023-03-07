@@ -1,6 +1,6 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import episodesReducer from '../features/episodes/episodesSlice';
-import sortReducer from '../features/episodes/sortSlice';
+import sortReducer from '../features/sort/sortSlice';
 import searchReducer from '../features/search/searchSlice';
 import selectedEpisodeReducer from '../features/selectedEpisode/selectedEpisodeSlice';
 

@@ -5,23 +5,34 @@ export const SORT = 'sort';
 
 export enum SortKey {
   YEAR = 'release_date',
-  EPISODE = 'episode_id'
+  EPISODE = 'episode_id',
+  TITLE = 'title'
 }
 
+
+export const titles = { [SortKey.YEAR]: 'Year', [SortKey.EPISODE]: 'Episode', [SortKey.TITLE]: 'Title'  };
+
+
 export interface SortState {
+  header:string,
   key:SortKey,
-  ascending: boolean
+  ascending: boolean | null
 }
 
 export interface SortByState {
   sort:SortState,
 }
 
+export const columnsConfig:SortState[] = [
+  {header:'EPISODE', key:SortKey.EPISODE, ascending:null},
+  {header:'TITLE', key:SortKey.TITLE, ascending:null},
+  {header:'YEAR', key:SortKey.YEAR, ascending:null}
+];
+
+const tempCC = {...columnsConfig[2]};
+tempCC.ascending = true;
 export const initialState: SortByState = {
-  sort:{
-    key:SortKey.YEAR,
-    ascending:false
-  }
+  sort:tempCC
 };
 
 export const sortSlice = createSlice({
