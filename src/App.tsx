@@ -6,6 +6,7 @@ import { searchInEpisodes } from './features/episodes/episodesHelpers';
 import { getEpisodes, loadEpisodesAsync } from './features/episodes/episodesSlice';
 import SearchInput from './features/search/SearchInput';
 import { getSearchQuery, searchEpisode } from './features/search/searchSlice';
+import SelectedEpisode from './features/selectedEpisode/SelectedEpisode';
 import { getSelectedEpisode, selectEpisode } from './features/selectedEpisode/selectedEpisodeSlice';
 
 function App() {
@@ -30,17 +31,28 @@ function App() {
     <>
       <header>
         <h1>moviepisodes</h1>
-        <SearchInput
-          onSearch={(searchQuery:string)=>dispatch(searchEpisode(searchQuery))}
-        />
       </header>
-      <h2>{selectedEpisode?.title}</h2>
+      <aside>
+        <SearchInput
+            onSearch={(searchQuery:string)=>dispatch(searchEpisode(searchQuery))}
+            placeholder={'Type to Search'}
+          />
+      </aside>
       {
-        filteredEpisodes &&
+        filteredEpisodes.length>0 &&
         <Episodes 
           episodes={filteredEpisodes}
           selectedEpisode={selectedEpisode}
           onEpisodeSelected={(selectedMovie:MovieEpisode)=>dispatch(selectEpisode(selectedMovie))}
+        />
+      }
+      {
+        !selectedEpisode && episodes.length>0 && <p>No Movie Selected</p>
+      }
+      {
+        selectedEpisode &&
+        <SelectedEpisode
+          selectedEpisode={selectedEpisode}
         />
       } 
     </>

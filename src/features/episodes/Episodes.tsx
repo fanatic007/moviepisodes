@@ -9,6 +9,7 @@ export function Episodes({episodes, selectedEpisode, onEpisodeSelected}:any) {
   const [episodesView, setEpisodesView] = useState(episodes);
   const dispatch = useAppDispatch();
   const {sort} = useAppSelector(getSortKey); 
+  // const [selectedEpisodeID, setSelectedEpisodeID] = useState(-1);
   useEffect(()=>{
     setEpisodesView(sortEpisodesBy([...episodesView], sort));
   },[sort, episodes]);
@@ -25,11 +26,15 @@ export function Episodes({episodes, selectedEpisode, onEpisodeSelected}:any) {
         columnsConfig={columnsConfig}/>
         <tbody>
             {
-              episodesView.map(({episode_id, title, release_date}:any)=>
-                <tr key={episode_id}>
-                  <td>{episode_id}</td>
-                  <td>{title}</td>
-                  <td>{new Date(release_date).getFullYear()}</td>
+              episodesView.map((episode:MovieEpisode)=>
+                <tr 
+                  key={episode.episode_id}
+                  className={ Object.is(episode,selectedEpisode) ? 'border':'' }
+                  onClick={()=>onEpisodeSelected(episode)}
+                  >
+                  <td>{episode.episode_id}</td>
+                  <td>{episode.title}</td>
+                  <td>{new Date(episode.release_date).getFullYear()}</td>
                 </tr>
               )
             }
