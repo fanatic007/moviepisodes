@@ -1,8 +1,8 @@
 import './SelectedEpisode.css';
 
-const SelectedEpisode = ({selectedEpisode, onCloseSelected }:any) => {
+const SelectedEpisode = ({selectedEpisode, onCloseSelected }:SelectedEpisodePropType) => {
   return (
-    <div className='movie-card'>      
+    <>      
       {
         !selectedEpisode && <p className='not-selected'>No Movie Selected</p>
       }
@@ -15,7 +15,7 @@ const SelectedEpisode = ({selectedEpisode, onCloseSelected }:any) => {
             <h6>Directed By:{selectedEpisode.director}</h6>
           </>
       }
-    </div>
+    </>
   )
 }
 

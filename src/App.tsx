@@ -36,6 +36,7 @@ function App() {
           <SearchInput
             onSearch={(searchQuery:string)=>dispatch(searchEpisode(searchQuery))}
             placeholder={'Type to Search'}
+            value={searchQuery}
           />
           <div className='list-details'>
               <div className='episodes'>
@@ -45,10 +46,12 @@ function App() {
                   onEpisodeSelected={(selectedMovie:MovieEpisode)=>dispatch(selectEpisode(selectedMovie))}
                 />
               </div>
-              <SelectedEpisode
-                onCloseSelected={()=>dispatch(selectEpisode(null))}
-                selectedEpisode={selectedEpisode}
-              />          
+              <div className='movie-card'>      
+                <SelectedEpisode
+                  onCloseSelected={()=>dispatch(selectEpisode(null))}
+                  selectedEpisode={selectedEpisode}
+                />               
+              </div>         
           </div>
         </>
       }

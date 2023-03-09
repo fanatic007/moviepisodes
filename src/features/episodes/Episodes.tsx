@@ -5,7 +5,7 @@ import { sortEpisodesBy } from './episodesHelpers';
 import { columnsConfig, getSortKey, sortEpisodes, SortState } from '../sort/sortSlice';
 import './Episodes.css'
 
-export function Episodes({episodes, selectedEpisode, onEpisodeSelected}:any) {
+export function Episodes({episodes, selectedEpisode, onEpisodeSelected}:EpisodesPropType) {
   const [episodesView, setEpisodesView] = useState(episodes);
   const dispatch = useAppDispatch();
   const {sort} = useAppSelector(getSortKey); 

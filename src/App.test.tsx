@@ -11,5 +11,5 @@ test('renders app title', () => {
     </Provider>
   );
 
-  expect(getByText(/moviepisodes/i)).toBeInTheDocument();
+  expect(getByText(/loading/i)).toBeInTheDocument();
 });

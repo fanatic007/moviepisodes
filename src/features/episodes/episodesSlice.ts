@@ -31,7 +31,7 @@ const initialState: EpisodesState = {
 export const loadEpisodesAsync = createAsyncThunk(
   LOAD_EPISODES,
   async () => {
-    let {results}:any = await(await fetch(FILMS_API)).json();
+    let {results}:FilmsApiResponse = await(await fetch(FILMS_API)).json();
     return results.map(({episode_id, title, release_date, director, opening_crawl }:MovieEpisode) => 
       ({episode_id, title, release_date, director, opening_crawl })
     ) as MovieEpisode[];

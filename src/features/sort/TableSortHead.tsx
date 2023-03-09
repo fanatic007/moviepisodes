@@ -8,7 +8,7 @@ export function getNewSortState(columnConfig:SortState, sortState:SortState) {
   newSortState.ascending = !newSortState.ascending; 
   return newSortState; 
 }
-const TableSortHead = ({ sortState , columnsConfig, onSort }: any) => {
+const TableSortHead = ({ sortState , columnsConfig, onSort }: TableSortHeadPropTypes) => {
   return (
     <thead>
       <tr>

@@ -6,7 +6,7 @@ import './SearchInput.css';
 const SEARCH_DEBOUNCE_TIME = 350;
 
 const onSearch$ = new Subject<React.ChangeEvent<HTMLInputElement>>();
-const SearchInput = ({ onSearch, value, placeholder, debounceDueTime=SEARCH_DEBOUNCE_TIME }: any) => {
+const SearchInput = ({ onSearch, value, placeholder, debounceDueTime=SEARCH_DEBOUNCE_TIME }: SearchInputPropType) => {
   useEffect(() => {
     const sub = onSearch$
       .pipe(debounceTime(debounceDueTime))
@@ -22,3 +22,4 @@ const SearchInput = ({ onSearch, value, placeholder, debounceDueTime=SEARCH_DEBO
 };
 
 export default memo(SearchInput);
+
