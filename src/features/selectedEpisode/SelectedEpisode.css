@@ -1,0 +1,27 @@
+.close-selected{
+  display: none;
+}
+
+@media screen and (max-width:768px){
+  .movie-card{
+    position: absolute;
+    bottom: 0;
+    z-index: 10;
+    margin: 0 12px;
+    margin-left: 2px;
+    background-color: whitesmoke;
+    border: 2px solid var(--accent-color);
+  }
+
+  .close-selected{
+    border-radius: 12px;
+    border: none;
+    color: white;
+    background-color: #000000aa;
+    position: absolute;
+    display: block;
+    top:0.5em;
+    right: 0.5em;
+    cursor: pointer;
+  }  
+}

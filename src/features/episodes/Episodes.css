@@ -1,0 +1,51 @@
+table{
+  width: 100%;
+  table-layout: fixed;
+  padding-block-start: 1em;
+}
+tr:active,tr:hover > td{
+  font-weight: bold;
+}
+
+
+th {
+  text-align: left;
+  font-weight: bold;
+  font-size: large;
+  padding: 4px;
+}
+
+th:last-child,td:last-child {
+  text-align: right;
+}
+
+td {
+  border-top: solid 0.8px lightgray;
+  font-weight: light;
+  font-size: small; 
+  padding: 4px;
+  height: 20px;
+  cursor: pointer;
+} 
+
+@media screen and (max-width:768px){
+  table{
+    table-layout: initial;
+  }
+
+  .not-selected {
+    display: none;
+  }
+
+}
+
+
+.selected {
+  font-weight: bold;
+  color: var(--accent-color);
+}
+
+.not-selected {
+  text-align: center;
+}
+

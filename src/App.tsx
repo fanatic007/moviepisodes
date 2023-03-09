@@ -3,7 +3,7 @@ import './App.css';
 import { useAppDispatch, useAppSelector } from './app/hooks';
 import { Episodes } from './features/episodes/Episodes';
 import { searchInEpisodes } from './features/episodes/episodesHelpers';
-import { getEpisodes, loadEpisodesAsync } from './features/episodes/episodesSlice';
+import { FetchEpisodesState, getEpisodes, loadEpisodesAsync } from './features/episodes/episodesSlice';
 import SearchInput from './features/search/SearchInput';
 import { getSearchQuery, searchEpisode } from './features/search/searchSlice';
 import SelectedEpisode from './features/selectedEpisode/SelectedEpisode';
@@ -11,7 +11,7 @@ import { getSelectedEpisode, selectEpisode } from './features/selectedEpisode/se
 
 function App() {
   const dispatch = useAppDispatch();
-  const {episodes} = useAppSelector(getEpisodes);
+  const {episodes,status} = useAppSelector(getEpisodes);
   const {searchQuery} = useAppSelector(getSearchQuery);
   const {selectedEpisode} = useAppSelector(getSelectedEpisode);
   const [filteredEpisodes, setFilteredEpisodes] = useState([] as MovieEpisode[]);
@@ -29,32 +29,29 @@ function App() {
 
   return (
     <>
-      <header>
-        <h1>moviepisodes</h1>
-      </header>
-      <aside>
-        <SearchInput
+      {  status === FetchEpisodesState.LOADING &&  <p className='star-wars not-selected'>loading....</p>    }
+      {
+        status === FetchEpisodesState.IDLE && 
+        <>
+          <SearchInput
             onSearch={(searchQuery:string)=>dispatch(searchEpisode(searchQuery))}
             placeholder={'Type to Search'}
           />
-      </aside>
-      {
-        filteredEpisodes.length>0 &&
-        <Episodes 
-          episodes={filteredEpisodes}
-          selectedEpisode={selectedEpisode}
-          onEpisodeSelected={(selectedMovie:MovieEpisode)=>dispatch(selectEpisode(selectedMovie))}
-        />
+          <div className='list-details'>
+              <div className='episodes'>
+                <Episodes                
+                  episodes={filteredEpisodes}
+                  selectedEpisode={selectedEpisode}
+                  onEpisodeSelected={(selectedMovie:MovieEpisode)=>dispatch(selectEpisode(selectedMovie))}
+                />
+              </div>
+              <SelectedEpisode
+                onCloseSelected={()=>dispatch(selectEpisode(null))}
+                selectedEpisode={selectedEpisode}
+              />          
+          </div>
+        </>
       }
-      {
-        !selectedEpisode && episodes.length>0 && <p>No Movie Selected</p>
-      }
-      {
-        selectedEpisode &&
-        <SelectedEpisode
-          selectedEpisode={selectedEpisode}
-        />
-      } 
     </>
   );
 }

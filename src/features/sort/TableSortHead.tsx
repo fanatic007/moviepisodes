@@ -1,5 +1,6 @@
 import { memo } from "react";
 import { SortState } from "./sortSlice";
+import './TableSortHead.css';
 const TABLE_NO_ROWS = `No rows`;
 
 export function getNewSortState(columnConfig:SortState, sortState:SortState) {

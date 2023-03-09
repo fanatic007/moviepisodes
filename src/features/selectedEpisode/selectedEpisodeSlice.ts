@@ -16,7 +16,7 @@ export const selectedEpisodeSlice = createSlice({
   name: SELECTED_EPISODE,
   initialState,
   reducers: {
-    selectEpisode: (state, action: PayloadAction<MovieEpisode>) => {
+    selectEpisode: (state, action: PayloadAction<MovieEpisode|null>) => {
       state.selectedEpisode = action.payload;
     },
   },

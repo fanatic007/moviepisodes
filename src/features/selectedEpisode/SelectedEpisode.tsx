@@ -1,11 +1,20 @@
-const SelectedEpisode = ({selectedEpisode}:any) => {
+import './SelectedEpisode.css';
+
+const SelectedEpisode = ({selectedEpisode, onCloseSelected }:any) => {
   return (
-    <div>
-      <h3>{selectedEpisode.title}</h3>
-      <br/>
-      <p>{selectedEpisode.opening_crawl}</p>
-      <br/>
-      <h6>Directed By:{selectedEpisode.director}</h6>
+    <div className='movie-card'>      
+      {
+        !selectedEpisode && <p className='not-selected'>No Movie Selected</p>
+      }
+      {
+        selectedEpisode && 
+          <>
+            <h3 className='star-wars'>{selectedEpisode.title}</h3>
+            <button className='close-selected' onClick={onCloseSelected}>x</button>
+            <p>{selectedEpisode.opening_crawl}</p>
+            <h6>Directed By:{selectedEpisode.director}</h6>
+          </>
+      }
     </div>
   )
 }

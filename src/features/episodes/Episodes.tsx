@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import TableSortHead from '../sort/TableSortHead';
-import Table from '../sort/TableSortHead';
 import { sortEpisodesBy } from './episodesHelpers';
 import { columnsConfig, getSortKey, sortEpisodes, SortState } from '../sort/sortSlice';
+import './Episodes.css'
 
 export function Episodes({episodes, selectedEpisode, onEpisodeSelected}:any) {
   const [episodesView, setEpisodesView] = useState(episodes);
@@ -29,10 +29,10 @@ export function Episodes({episodes, selectedEpisode, onEpisodeSelected}:any) {
               episodesView.map((episode:MovieEpisode)=>
                 <tr 
                   key={episode.episode_id}
-                  className={ Object.is(episode,selectedEpisode) ? 'border':'' }
+                  className={ Object.is(episode,selectedEpisode) ? 'selected':'' }
                   onClick={()=>onEpisodeSelected(episode)}
                   >
-                  <td>{episode.episode_id}</td>
+                  <td>EPISODE {episode.episode_id}</td>
                   <td>{episode.title}</td>
                   <td>{new Date(episode.release_date).getFullYear()}</td>
                 </tr>
