@@ -1,6 +1,5 @@
 import Fuse from "fuse.js";
-import { FUSE_OPTIONS } from "./episodesSlice";
-import { SortKey, SortState } from "../sort/sortSlice";
+import { FUSE_OPTIONS, SortKey } from "../../constants";
 
 export function sortEpisodesBy(episodes:MovieEpisode[], {key, ascending}: SortState){
   return episodes.sort((a:MovieEpisode, b:MovieEpisode) => {
@@ -13,6 +12,8 @@ export function sortEpisodesBy(episodes:MovieEpisode[], {key, ascending}: SortSt
           return ascending? a[SortKey.EPISODE] -  b[SortKey.EPISODE] : b[SortKey.EPISODE] -  a[SortKey.EPISODE]
         case SortKey.TITLE:
           return ascending? a[SortKey.TITLE] >  b[SortKey.TITLE] ? 1:-1 : b[SortKey.TITLE] >  a[SortKey.TITLE]? 1:-1;
+        default:
+          return 1;
       }
   });
 }

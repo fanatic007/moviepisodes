@@ -1,19 +1,5 @@
-import episodesReducer, { EpisodesState, FetchEpisodesState, loadEpisodesAsync, setEpisodes } from './episodesSlice';
-
-export const EPISODES: MovieEpisode[] = [{
-  episode_id: 5,
-  title: "The Empire Strikes Back",
-  release_date: "1980-05-17",
-  director: "Irvin Kershner",
-  opening_crawl: "It is a dark time for the Rebellion. Although the… remote probes into the far reaches of space...."
-},
-{
-  episode_id: 4,
-  title: "A new Hope",
-  release_date: "1977-05-25",
-  director: "George Lucas",
-  opening_crawl: "It is a period of civil war.Rebel spaceships, strikingfrom a hidden base, have wontheir first victory againstthe evil Galactic Empire.During the battle, Rebelspies managed to steal secretplans to the Empire'sultimate weapon, the DEATHSTAR, an armored spacestation with enough powerto destroy an entire planet.P"
-}];
+import { EPISODES, FetchEpisodesState } from '../../constants';
+import episodesReducer, { EpisodesState, loadEpisodesAsync, setEpisodes } from './episodesSlice';
 
 describe('episodes reducer', () => {
   const initialState: EpisodesState = {
@@ -44,4 +30,3 @@ describe('episodes reducer', () => {
     expect(episodes).toEqual(EPISODES);
   });
 });
-``

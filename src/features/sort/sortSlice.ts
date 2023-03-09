@@ -1,27 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
+import { SortByState, SortKey } from '../../constants';
 
-export const SORT = 'sort';
-
-export enum SortKey {
-  YEAR = 'release_date',
-  EPISODE = 'episode_id',
-  TITLE = 'title'
-}
-
-
-export const titles = { [SortKey.YEAR]: 'Year', [SortKey.EPISODE]: 'Episode', [SortKey.TITLE]: 'Title'  };
-
-
-export interface SortState {
-  header:string,
-  key:SortKey,
-  ascending: boolean | null
-}
-
-export interface SortByState {
-  sort:SortState,
-}
+const SORT = 'sort';
 
 export const columnsConfig:SortState[] = [
   {header:'EPISODE', key:SortKey.EPISODE, ascending:null},
@@ -31,13 +12,13 @@ export const columnsConfig:SortState[] = [
 
 const tempCC = {...columnsConfig[2]};
 tempCC.ascending = true;
-export const initialState: SortByState = {
+export const sortInitialState: SortByState = {
   sort:tempCC
 };
 
 export const sortSlice = createSlice({
   name: SORT,
-  initialState,
+  initialState: sortInitialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
     sortEpisodes: (state, action: PayloadAction<SortState>) => {

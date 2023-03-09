@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import { useAppDispatch, useAppSelector } from './app/hooks';
+import { FetchEpisodesState } from './constants';
 import { Episodes } from './features/episodes/Episodes';
 import { searchInEpisodes } from './features/episodes/episodesHelpers';
-import { FetchEpisodesState, getEpisodes, loadEpisodesAsync } from './features/episodes/episodesSlice';
+import { getEpisodes, loadEpisodesAsync } from './features/episodes/episodesSlice';
 import SearchInput from './features/search/SearchInput';
 import { getSearchQuery, searchEpisode } from './features/search/searchSlice';
 import SelectedEpisode from './features/selectedEpisode/SelectedEpisode';

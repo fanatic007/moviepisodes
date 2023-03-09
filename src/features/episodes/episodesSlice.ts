@@ -1,22 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
+import { FetchEpisodesState, FILMS_API, LOAD_EPISODES } from '../../constants';
 
-export const EPISODES = 'episodes';
-export const LOAD_EPISODES = `${EPISODES}/loadEpisodes`;
-export enum FetchEpisodesState {
-  IDLE='idle',
-  LOADING='loading',
-  FAILED='failed'
-}
-
-export const EPISODES_SEARCH_KEYS = ['episode_id', 'title', 'release_date'];
-
-export const FUSE_OPTIONS = {
-  threshold: 0.3,
-  keys: EPISODES_SEARCH_KEYS
-}
-
-export const FILMS_API = 'https://swapi.dev/api/films/?format=json';
+const EPISODES = 'episodes';
 
 export interface EpisodesState {
   episodes:MovieEpisode[],

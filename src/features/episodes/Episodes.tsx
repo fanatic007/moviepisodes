@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import TableSortHead from '../sort/TableSortHead';
 import { sortEpisodesBy } from './episodesHelpers';
-import { columnsConfig, getSortKey, sortEpisodes, SortState } from '../sort/sortSlice';
+import { columnsConfig, getSortKey, sortEpisodes } from '../sort/sortSlice';
 import './Episodes.css'
 
 export function Episodes({episodes, selectedEpisode, onEpisodeSelected}:EpisodesPropType) {
   const [episodesView, setEpisodesView] = useState(episodes);
   const dispatch = useAppDispatch();
   const {sort} = useAppSelector(getSortKey); 
-  // const [selectedEpisodeID, setSelectedEpisodeID] = useState(-1);
+
   useEffect(()=>{
     setEpisodesView(sortEpisodesBy([...episodesView], sort));
   },[sort, episodes]);

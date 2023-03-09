@@ -1,10 +1,11 @@
+import { NO_MOVIE_SELECTED } from '../../constants';
 import './SelectedEpisode.css';
 
 const SelectedEpisode = ({selectedEpisode, onCloseSelected }:SelectedEpisodePropType) => {
   return (
     <>      
       {
-        !selectedEpisode && <p className='not-selected'>No Movie Selected</p>
+        !selectedEpisode && <p className='not-selected'>{NO_MOVIE_SELECTED}</p>
       }
       {
         selectedEpisode && 

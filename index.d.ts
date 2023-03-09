@@ -6,7 +6,11 @@ type MM = `0${oneToNine}` | `1${0|1|2}`
 type DD = `${0}${oneToNine}` | `${1|2}${zeroToNine}` | `3${0|1}`
 type RawDateString = `${YYYY}-${MM}-${DD}`;
 
-
+type SortState = {
+  header:string,
+  key:SortKey,
+  ascending: boolean | null
+}
 
 type MovieEpisode = {
   title: string,

@@ -1,4 +1,4 @@
-import { EPISODES } from '../episodes/episodesSlice.spec';
+import { EPISODES } from '../../constants';
 import selectedEpisodeReducer, { SelectedEpisode, selectEpisode } from './selectedEpisodeSlice';
 
 describe('selected movie reducer', () => {

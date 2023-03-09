@@ -1,6 +1,6 @@
 import { searchInEpisodes, sortEpisodesBy } from './episodesHelpers';
-import { EPISODES } from './episodesSlice.spec';
-import { columnsConfig, initialState } from '../sort/sortSlice';
+import { columnsConfig, sortInitialState } from '../sort/sortSlice';
+import { EPISODES } from '../../constants';
 
 describe('episodes search and sort', () => {
   it('search in episode', () => {
@@ -14,7 +14,7 @@ describe('episodes search and sort', () => {
   });
 
   it('sort episodes by Year asc', () => {
-    let sortedResult = sortEpisodesBy([...EPISODES],initialState.sort);
+    let sortedResult = sortEpisodesBy([...EPISODES],sortInitialState.sort);
     expect(sortedResult[0].title).toContain('new');
   });
 
